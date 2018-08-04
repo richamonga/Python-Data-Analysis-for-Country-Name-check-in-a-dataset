@@ -1,0 +1,2 @@
+# Python-Data-Analysis-for-Country-Name-check-in-a-dataset
+Recently I started my journey towards extensively using Python for Data Analysis and there were so many instances where I encountered data sets which contained country names.The problem was how do I validate if country names coming in millions of rows in my data set were correct or not?  Have you ever came across such issue? If yes,then this post shall be helpful for you.I have written a function in Python which can be used to find out incorrect country names coming in a data set.
