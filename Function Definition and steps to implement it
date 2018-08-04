@@ -1,0 +1,43 @@
+#importing essential libraries
+import numpy as np
+import pandas as pd
+import pycountry as pc
+
+#Loading csv data into a pandas dataframe
+df = pd.read_csv("timesData.csv")
+
+#Fetching country column from dataset as list and converting each element into upper case
+input_country_list = list(df['country'])
+input_country_list = [element.upper() for element in input_country_list] 
+
+#Function definition 
+def country_name_check():
+    pycntrylst = list(pc.countries)
+    alpha_2 = []
+    alpha_3 = []
+    name = []
+    common_name = []
+    official_name = []
+    invalid_countrynames =[]
+    tobe_deleted = ['IRAN','SOUTH KOREA','NORTH KOREA','SUDAN','MACAU','REPUBLIC OF IRELAND']
+    for i in pycntrylst:
+        alpha_2.append(i.alpha_2)
+        alpha_3.append(i.alpha_3)
+        name.append(i.name)
+        if hasattr(i, "common_name"):
+            common_name.append(i.common_name)
+        else:
+            common_name.append("")
+        if hasattr(i, "official_name"):
+            official_name.append(i.official_name)
+        else:
+            official_name.append("")
+    for j in input_country_list:
+        if j not in map(str.upper,alpha_2) and j not in map(str.upper,alpha_3) and j not in map(str.upper,name) and j not in map(str.upper,common_name) and j not in map(str.upper,official_name):
+            invalid_countrynames.append(j)
+    invalid_countrynames = list(set(invalid_countrynames))
+    invalid_countrynames = [item for item in invalid_countrynames if item not in tobe_deleted]
+    return print(invalid_countrynames)
+    
+    #Function Call
+    country_name_check()
